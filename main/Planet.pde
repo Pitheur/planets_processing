@@ -1,7 +1,5 @@
 class Planet {
   
-  String name;
-  
   PVector position;
   PVector velocity;
   PVector acceleration;
@@ -11,15 +9,24 @@ class Planet {
   float diameter;
   float distanceFromSun;
   
+  String name;
+  
   Planet (String name, float diameter, float distanceFromSun, PVector acceleration, PVector velocity, PVector gravity, float mass)
   {
-    this.name = name;
     this.diameter = diameter;
     this.distanceFromSun = distanceFromSun;
     this.acceleration = acceleration;
     this.velocity = velocity;
     this.gravity = gravity;
     this.mass = mass;
+  }
+  
+   void setPosition(PVector p){
+    this.position = p;
+  }
+  
+  void setPosition(float x, float y){
+    this.position = new PVector(x,y);
   }
   
   void setDiameter(float diameter){
@@ -38,6 +45,18 @@ class Planet {
     this.gravity = gravity;
   }
   
+  void setName(String s){
+    this.name = s;
+  }
+  
+  void setGravity(Planet p){
+    float rX = (p.position.x - this.position.x)/getDistance(p);
+    float rY = (p.position.y - this.position.y)/getDistance(p);
+    PVector r = new PVector(rX,rY);
+    
+    this.gravity = r.mult(-0.6*(getMass()*p.getMass())/sqrt(getDistance(p)));
+  }
+  
   void setAcceleration(PVector acceleration){
     this.acceleration = acceleration;
   }
@@ -46,12 +65,8 @@ class Planet {
     this.mass = m;
   }
   
-  void setName(String s){
-    this.name = s;
-  }
-  
-  String getName(){
-    return this.name;
+  PVector getPosition(){
+    return this.position;
   }
   
   float getDiameter(){
@@ -60,6 +75,10 @@ class Planet {
   
   float getDistanceFromSun(){
     return distanceFromSun;
+  }
+  
+  float getDistance(Planet p){
+    return  getPosition().dist(p.getPosition());
   }
   
   PVector getVelocity(){
@@ -78,11 +97,24 @@ class Planet {
     return this.mass;
   }
   
+  String getName(){
+    return this.name;
+  }
+  
+  void applyForce(PVector force){
+    PVector f = PVector.div(force, getMass());
+    this.acceleration.add(f);
+  }
+  
+  void update(){
+    velocity.add(acceleration);
+    position.add(velocity);
+    acceleration.mult(0);
+  }
+  
   void display(){
     ellipseMode(CENTER);
-    smooth();
-    stroke(#D7F1FA);
-    fill(#54CBF5);
-    ellipse(width/2,height/2,this.diameter,this.diameter);
+    ellipse(position.x,position.y,getDiameter(),getDiameter());
   }
+    
 }
