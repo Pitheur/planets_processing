@@ -54,7 +54,7 @@ class Planet {
     float rY = (p.position.y - this.position.y)/getDistance(p);
     PVector r = new PVector(rX,rY);
     
-    this.gravity = r.mult(-0.6*(getMass()*p.getMass())/sqrt(getDistance(p)));
+    this.gravity = r.mult(-GRAVITATION*(getMass()*p.getMass())/sqrt(getDistance(p)));
   }
   
   void setAcceleration(PVector acceleration){

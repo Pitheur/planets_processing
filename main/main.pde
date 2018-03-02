@@ -1,5 +1,7 @@
 import java.util.Iterator;
 
+final float GRAVITATION = 0.6;
+
 StarsList starsSparkleList = new StarsList();
 StarsList starsMovingList = new StarsList();
 StarsList starsList = new StarsList();
@@ -8,8 +10,8 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0.1,0), new PVector(0,0), 0.01);
-Planet sun = new Planet("Soleil",100f, 0f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 50);
+Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,-2), new PVector(0,0), 0.01);
+Planet sun = new Planet("Soleil",100f, 0f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 1);
 
 void setup() {
   size(640, 360);
