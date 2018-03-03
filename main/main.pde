@@ -10,8 +10,9 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,5), new PVector(0,0), 0.01);
-Planet sun = new Planet("Soleil",100f, 0f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 1);
+Planet moon = new Planet("Lune",5f, 0f, new PVector(0,0), new PVector(0,0.9), new PVector(0,0), 0.15);
+Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,0.70), new PVector(0,0), 0.2);
+Planet sun = new Planet("Soleil",100f, 0f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 200);
 
 void setup() {
   size(640, 360);
@@ -33,7 +34,8 @@ void setup() {
   starsList.addAllStarsList(stars);
   
   sun.setPosition(width/2,height/2);
-  earth.setPosition(12,12);
+  earth.setPosition(150,height/2);
+  moon.setPosition(145,height/2);
 }
 
 void draw() {
@@ -51,6 +53,8 @@ void draw() {
   pushStyle();
   stroke(#FFAA00);
   fill(#FFF6AF);
+  sun.applyForce(earth.getGravity());
+  sun.update();
   sun.display();
   sun.setGravity(earth);
   popStyle();
@@ -61,6 +65,16 @@ void draw() {
   earth.applyForce(sun.getGravity());
   earth.update();
   earth.display();
+  //earth.setGravity(sun);
+  popStyle();
+  
+  pushStyle();
+  stroke(#DEDEDE);
+  fill(#8B8787);
+  moon.applyForce(earth.getGravity());
+  moon.applyForce(sun.getGravity());
+  moon.update();
+  moon.display();
   popStyle();
 
 }
