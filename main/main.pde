@@ -10,7 +10,7 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,2), new PVector(0,0), 0.01);
+Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,5), new PVector(0,0), 0.01);
 Planet sun = new Planet("Soleil",100f, 0f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 1);
 
 void setup() {
