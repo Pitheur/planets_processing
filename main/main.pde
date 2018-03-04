@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import processing.core.PApplet;
 
 final float GRAVITATION = 0.6;
 
@@ -10,9 +11,11 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet moon = new Planet("Lune",5f, 0f, new PVector(0,0), new PVector(0,0.9), new PVector(0,0), 0.15);
-Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,0.70), new PVector(0,0), 0.2);
+Planet moon = new Planet("Lune",5f, 0f, new PVector(0,0), new PVector(0,0.1), new PVector(0,0), 0.05);
+Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,0.7), new PVector(0,0), 0.2);
 Planet sun = new Planet("Soleil",100f, 0f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 200);
+
+
 
 void setup() {
   size(640, 360);
@@ -35,7 +38,10 @@ void setup() {
   
   sun.setPosition(width/2,height/2);
   earth.setPosition(150,height/2);
-  moon.setPosition(145,height/2);
+  moon.setPosition(140,height/2);
+
+  Gui gui = new Gui(this);
+  gui.createGroup();
 }
 
 void draw() {
@@ -63,9 +69,10 @@ void draw() {
   stroke(#CBEFFF);
   fill(#78B4FC);
   earth.applyForce(sun.getGravity());
+  //earth.applyForce(moon.getGravity());
   earth.update();
   earth.display();
-  //earth.setGravity(sun);
+  earth.setGravity(moon);
   popStyle();
   
   pushStyle();
