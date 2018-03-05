@@ -1,3 +1,5 @@
+import controlP5.*;
+
 import java.util.Iterator;
 import processing.core.PApplet;
 
@@ -79,7 +81,7 @@ void draw() {
   stroke(#DEDEDE);
   fill(#8B8787);
   moon.applyForce(earth.getGravity());
-  moon.applyForce(sun.getGravity());
+  //moon.applyForce(sun.getGravity());
   moon.update();
   moon.display();
   popStyle();
