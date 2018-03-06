@@ -13,9 +13,9 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet moon = new Planet("Lune",5f, 0f, new PVector(0,0), new PVector(0,0.1), new PVector(0,0), 0.05);
-Planet earth = new Planet("Terre",10f, 0f, new PVector(0,0), new PVector(0,0.7), new PVector(0,0), 0.2);
-Planet sun = new Planet("Soleil",100f, 0f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 200);
+Planet moon = new Planet("Lune",5f, new PVector(0,0), new PVector(0,0.1), new PVector(0,0), 0.05);
+Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,0.7), new PVector(0,0), 0.2);
+Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 200);
 
 
 
