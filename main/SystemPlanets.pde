@@ -1,23 +1,29 @@
 import java.util.List;
 
-class SystemPlanets{
+class SystemPlanets implements CelestialBody{
   Planet barycenter;
-  List<Planet> listPlanets;
+  List<CelestialBody> listPlanets;
   
   SystemPlanets(){
     barycenter = new Planet(
       "NoName",
-      10f, 
-      0f, 
+      10f,
       new PVector(0,0), 
       new PVector(0,0), 
       new PVector(0,0), 
-      0);
+      0,new int[]{0,0});
     listPlanets = null;
   }
   
-  SystemPlanets(List l){
+  SystemPlanets(Planet p,List l){
+    this.barycenter = p;
     this.listPlanets = l;
+  }
+  
+  void addPlanet(CelestialBody c){
+    if (listPlanets != null){
+      listPlanets.add(c);
+    }
   }
   
   void addAllPlanet(List l){
@@ -31,14 +37,22 @@ class SystemPlanets{
     else return null;
   }
   
-  Planet getBarycenter(){
+  public float getPositionX(){
+    return this.barycenter.position.x;
+  }
+  
+  public float getPositionY(){
+     return this.barycenter.position.y;
+  }
+  
+  CelestialBody getBarycenter(){
     if(this.barycenter != null){
       return this.barycenter;
     }
     else return null;
   }
   
-  Planet getPlanet(int i){
+  CelestialBody getPlanet(int i){
     if(!listPlanets.isEmpty()){
       return this.listPlanets.get(i);
     }
@@ -49,8 +63,8 @@ class SystemPlanets{
   
   List getAllPlanets(){
     if(!listPlanets.isEmpty()){
-      List<Planet> l = null;
-      for(Planet p : listPlanets){
+      List<CelestialBody> l = null;
+      for(CelestialBody p : listPlanets){
         l.add(p);
       }
       return l;
@@ -58,19 +72,12 @@ class SystemPlanets{
     return null;
   }
   
-  Planet getPlanetByName(String name){
-    if(!listPlanets.isEmpty()){
-      for(Planet p: listPlanets){
-        if(p.getName() == name){
-          return p;
-        }
-      }
-    }
-    return null;
-  }
-  
   int getListPlanetSize(){
     return listPlanets.size();
+  }
+  
+  PVector getGravity(){
+    return barycenter.getGravity();
   }
   
   void setPlanet(Planet p){
@@ -97,12 +104,22 @@ class SystemPlanets{
     barycenter.setGravity(gravity);
   }
   
-  void setName(String s){
-    barycenter.setName(s);
-  }
-  
   void setGravity(Planet p){
     barycenter.setGravity(p);
+  }
+  
+  void setAllGravity(){
+    PVector zero = new PVector(0,0);
+    for(CelestialBody c : listPlanets){ //<>//
+      barycenter.setGravity(c.getGravity());
+      if(c.getGravity().x == 0 && c.getGravity().y ==0){
+       c.setGravity(barycenter);
+     }
+    }
+  }
+  
+  void setName(String s){
+    barycenter.setName(s);
   }
   
   void setAcceleration(PVector acceleration){
@@ -115,5 +132,25 @@ class SystemPlanets{
   
   Iterator iterator(){
     return listPlanets.iterator();
+  }
+  
+  void display(){
+    for(CelestialBody c : listPlanets){
+      c.display();
+    }
+    barycenter.display();
+  }
+  
+  void applyForce(PVector f){
+    for(CelestialBody c : listPlanets){
+      barycenter.applyForce(c.getGravity());
+    }
+  }
+  
+  void update(){
+    for(CelestialBody c : listPlanets){
+      c.update();
+    }
+    barycenter.update();
   }
 }

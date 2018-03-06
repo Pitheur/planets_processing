@@ -1,4 +1,4 @@
-class Planet {
+class Planet implements CelestialBody{
   
   String name;
   
@@ -6,11 +6,12 @@ class Planet {
   PVector velocity;
   PVector acceleration;
   PVector gravity;
+  int[] displayColor;
   
   float mass;
   float diameter;
   
-  Planet (String name, float diameter, PVector acceleration, PVector velocity, PVector gravity, float mass)
+  Planet (String name, float diameter, PVector acceleration, PVector velocity, PVector gravity, float mass, int[] displayColor)
   {
     this.diameter = diameter;
     this.acceleration = acceleration;
@@ -18,6 +19,7 @@ class Planet {
     this.gravity = gravity;
     this.mass = mass;
     this.name =name;
+    this.displayColor = displayColor;
   }
 
    void setPosition(PVector p){
@@ -64,6 +66,14 @@ class Planet {
     return this.position;
   }
   
+  public float getPositionX(){
+    return this.position.x;
+  }
+  
+  public float getPositionY(){
+     return this.position.y;
+  }
+  
   float getDiameter(){
     return diameter;
   }
@@ -105,6 +115,8 @@ class Planet {
   
   void display(){
     ellipseMode(CENTER);
+    stroke(displayColor[1]);
+    fill(displayColor[0]);
     ellipse(position.x,position.y,getDiameter(),getDiameter());
   }
 }
