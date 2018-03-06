@@ -109,10 +109,9 @@ class SystemPlanets implements CelestialBody{
   }
   
   void setAllGravity(){
-    PVector zero = new PVector(0,0);
     for(CelestialBody c : listPlanets){ //<>//
       barycenter.setGravity(c.getGravity());
-      if(c.getGravity().x == 0 && c.getGravity().y ==0){
+      if(barycenter.getGravity().x != 0 && barycenter.getGravity().y !=0){
        c.setGravity(barycenter);
      }
     }
