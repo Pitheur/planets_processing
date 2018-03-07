@@ -1,8 +1,9 @@
 import java.util.List;
+import java.util.Collection;
 
 class SystemPlanets implements CelestialBody{
   Planet barycenter;
-  List<CelestialBody> listPlanets;
+  HashMap<CelestialBody,PVector> listPlanets;
   
   SystemPlanets(){
     barycenter = new Planet(
@@ -15,19 +16,19 @@ class SystemPlanets implements CelestialBody{
     listPlanets = null;
   }
   
-  SystemPlanets(Planet p,List l){
+  SystemPlanets(Planet p,HashMap l){
     this.barycenter = p;
     this.listPlanets = l;
   }
   
   void addPlanet(CelestialBody c){
     if (listPlanets != null){
-      listPlanets.add(c);
+      listPlanets.put(c, c.getGravity());
     }
   }
   
-  void addAllPlanet(List l){
-    listPlanets.addAll(l);
+  void addAllPlanet(HashMap l){
+    listPlanets.putAll(l);
   }
   
   PVector getPosition(){
@@ -52,22 +53,9 @@ class SystemPlanets implements CelestialBody{
     else return null;
   }
   
-  CelestialBody getPlanet(int i){
+  Collection getAllPlanets(){
     if(!listPlanets.isEmpty()){
-      return this.listPlanets.get(i);
-    }
-    else{
-      return null;
-    }
-  }
-  
-  List getAllPlanets(){
-    if(!listPlanets.isEmpty()){
-      List<CelestialBody> l = null;
-      for(CelestialBody p : listPlanets){
-        l.add(p);
-      }
-      return l;
+      return this.listPlanets.entrySet();
     }
     return null;
   }
@@ -80,8 +68,8 @@ class SystemPlanets implements CelestialBody{
     return barycenter.getGravity();
   }
   
-  void setPlanet(Planet p){
-    listPlanets.add(p);
+  void setPlanet(CelestialBody c, PVector m){
+    listPlanets.put(c,m);
   }
   
   void setBarycenter(Planet p){
@@ -109,11 +97,14 @@ class SystemPlanets implements CelestialBody{
   }
   
   void setAllGravity(){
-    for(CelestialBody c : listPlanets){ //<>//
-      barycenter.setGravity(c.getGravity());
-      if(barycenter.getGravity().x != 0 && barycenter.getGravity().y !=0){
-       c.setGravity(barycenter);
-     }
+    for(CelestialBody c : listPlanets.keySet()){ //<>//
+      Planet p = (Planet)c;
+      barycenter.setGravity(p); //<>//
+      PVector g = barycenter.getGravity();
+      listPlanets.put(c,g);
+     // if(barycenter.getGravity().x != 0 && barycenter.getGravity().y !=0){
+     //  c.setGravity(barycenter);
+     //}
     }
   }
   
@@ -129,25 +120,21 @@ class SystemPlanets implements CelestialBody{
     barycenter.setMass(m);
   }
   
-  Iterator iterator(){
-    return listPlanets.iterator();
-  }
-  
   void display(){
-    for(CelestialBody c : listPlanets){
+    for(CelestialBody c : listPlanets.keySet()){
       c.display();
     }
     barycenter.display();
   }
   
   void applyForce(PVector f){
-    for(CelestialBody c : listPlanets){
+    for(CelestialBody c : listPlanets.keySet()){
       barycenter.applyForce(c.getGravity());
     }
   }
   
   void update(){
-    for(CelestialBody c : listPlanets){
+    for(CelestialBody c : listPlanets.keySet()){
       c.update();
     }
     barycenter.update();
