@@ -128,8 +128,8 @@ class SystemPlanets implements CelestialBody{
   }
   
   void applyForce(PVector f){
-    for(CelestialBody c : listPlanets.keySet()){
-      barycenter.applyForce(c.getGravity());
+    for(PVector c : listPlanets.values()){
+      barycenter.applyForce(c);
     }
   }
   
