@@ -13,8 +13,8 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet moon = new Planet("Lune",5f, new PVector(0,0), new PVector(0,0.1), new PVector(0,0), 0.05,new int [] {#8B8787,#DEDEDE});
-Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,0.7), new PVector(0,0), 0.2,new int [] {#78B4FC,#CBEFFF});
+Planet moon = new Planet("Lune",5f, new PVector(0,0), new PVector(0,0.5), new PVector(0,0), 0.02,new int [] {#8B8787,#DEDEDE});
+Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,0.7), new PVector(0,0), 2,new int [] {#78B4FC,#CBEFFF});// 0.70858809351921081542968730
 Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 200,new int [] {#FFF6AF,#FFAA00});
 
 HashMap<CelestialBody,PVector> model = new HashMap<CelestialBody,PVector>();
@@ -44,9 +44,9 @@ void setup() { //<>//
   
   sun.setPosition(width/2,height/2);
   earth.setPosition(150,height/2);
-  moon.setPosition(140,height/2);
+  moon.setPosition(earth.position.x-10,height/2);
   soleilTerre.addPlanet(earth);
-  //TerreLune.addPlanet(moon);
+  TerreLune.addPlanet(moon);
   soleilTerre.addPlanet(TerreLune);
   Gui gui = new Gui(this);
   gui.createGroup();
@@ -64,7 +64,7 @@ void draw() {
   starsList.display();
   popStyle();
   
-  soleilTerre.update();
+  soleilTerre.update(); //<>//
   soleilTerre.display();
   soleilTerre.setAllGravity();
   soleilTerre.applyForce(null);
