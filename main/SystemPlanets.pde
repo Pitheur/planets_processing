@@ -98,13 +98,21 @@ class SystemPlanets implements CelestialBody{
   
   void setAllGravity(){
     for(CelestialBody c : listPlanets.keySet()){ //<>//
-      Planet p = (Planet)c;
-      barycenter.setGravity(p); //<>//
-      PVector g = barycenter.getGravity();
-      listPlanets.put(c,g);
-     // if(barycenter.getGravity().x != 0 && barycenter.getGravity().y !=0){
-     //  c.setGravity(barycenter);
-     //}
+      if(c instanceof Planet)
+      {
+        Planet p = (Planet)c;
+        barycenter.setGravity(p); //<>//
+        PVector g = barycenter.getGravity();
+        listPlanets.put(c,g);
+      }
+      else
+      {
+        if(c instanceof SystemPlanets)
+        {
+          SystemPlanets sp = (SystemPlanets)c;
+          sp.setAllGravity();
+        }
+      }
     }
   }
   
@@ -128,13 +136,13 @@ class SystemPlanets implements CelestialBody{
   }
   
   void applyForce(PVector f){
-    for(PVector c : listPlanets.values()){
-      barycenter.applyForce(c);
+    for(CelestialBody c : listPlanets.keySet()){ //<>//
+      c.applyForce(listPlanets.get(c));
     }
   }
   
   void update(){
-    for(CelestialBody c : listPlanets.keySet()){
+    for(CelestialBody c : listPlanets.keySet()){ //<>//
       c.update();
     }
     barycenter.update();

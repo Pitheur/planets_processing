@@ -18,10 +18,12 @@ Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,0.7), new
 Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 200,new int [] {#FFF6AF,#FFAA00});
 
 HashMap<CelestialBody,PVector> model = new HashMap<CelestialBody,PVector>();
+HashMap<CelestialBody,PVector> model2 = new HashMap<CelestialBody,PVector>();
 
-SystemPlanets sp = new SystemPlanets(sun,model);
+SystemPlanets soleilTerre = new SystemPlanets(sun,model);
+SystemPlanets TerreLune = new SystemPlanets(earth,model2);
 
-void setup() {
+void setup() { //<>//
   size(640, 360);
   background(0);
   frameRate(60);
@@ -43,7 +45,9 @@ void setup() {
   sun.setPosition(width/2,height/2);
   earth.setPosition(150,height/2);
   moon.setPosition(140,height/2);
-  sp.addPlanet(earth);
+  soleilTerre.addPlanet(earth);
+  //TerreLune.addPlanet(moon);
+  soleilTerre.addPlanet(TerreLune);
   Gui gui = new Gui(this);
   gui.createGroup();
 }
@@ -60,9 +64,10 @@ void draw() {
   starsList.display();
   popStyle();
   
-  sp.update();
-  sp.display();
-  sp.setAllGravity();
+  soleilTerre.update();
+  soleilTerre.display();
+  soleilTerre.setAllGravity();
+  soleilTerre.applyForce(null);
   //sun.update();
   //sun.display();
   //sun.setGravity(earth);
