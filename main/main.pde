@@ -3,7 +3,7 @@ import controlP5.*;
 import java.util.*;
 import processing.core.PApplet;
 
-final float GRAVITATION = 0.15;
+final float GRAVITATION = 0.16;
 
 StarsList starsSparkleList = new StarsList();
 StarsList starsMovingList = new StarsList();
@@ -27,7 +27,7 @@ SystemPlanets TerreLune = new SystemPlanets(earth,model2);
 void setup() { //<>//
   size(1440, 900);
   background(0);
-  frameRate(60);
+  frameRate(30);
   for(int i=0; i < 150; i++){
     starsSparkle.add(new Star(random(width),random(height)));
   }
@@ -52,6 +52,7 @@ void setup() { //<>//
   soleilTerre.addPlanet(mars);
   TerreLune.addPlanet(moon);
   soleilTerre.addPlanet(TerreLune);
+  
   Gui gui = new Gui(this);
   gui.createGroup();
 }

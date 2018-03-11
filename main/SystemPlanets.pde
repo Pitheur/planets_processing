@@ -4,15 +4,15 @@ import java.util.Collection;
 class SystemPlanets implements CelestialBody{
   Planet barycenter;
   HashMap<CelestialBody,PVector> listPlanets;
-  
+
   SystemPlanets(){
     barycenter = new Planet(
-      "NoName",
-      10f,
-      new PVector(0,0), 
-      new PVector(0,0), 
-      new PVector(0,0), 
-      0,new int[]{0,0});
+      "NoName",           // Name
+      10f,                // Diameter
+      new PVector(0,0),   // Acceleration
+      new PVector(0,0),   // Velocity
+      new PVector(0,0),   // Gravity
+      0,new int[]{0,0});  // Fill Color / Stroke Color
     listPlanets = null;
   }
   

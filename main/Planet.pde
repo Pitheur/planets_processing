@@ -13,12 +13,12 @@ class Planet implements CelestialBody{
   
   Planet (String name, float diameter, PVector acceleration, PVector velocity, PVector gravity, float mass, int[] displayColor)
   {
+    this.name =name;
     this.diameter = diameter;
     this.acceleration = acceleration;
     this.velocity = velocity;
     this.gravity = gravity;
     this.mass = mass;
-    this.name =name;
     this.displayColor = displayColor;
   }
 
