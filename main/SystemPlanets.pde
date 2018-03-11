@@ -9,10 +9,12 @@ class SystemPlanets implements CelestialBody{
     barycenter = new Planet(
       "NoName",           // Name
       10f,                // Diameter
-      new PVector(0,0),   // Acceleration
-      new PVector(0,0),   // Velocity
+      0f,                 // Acceleration
+      0f,                 // Velocity
       new PVector(0,0),   // Gravity
-      0,new int[]{0,0});  // Fill Color / Stroke Color
+      0f,                 // Mass
+      0f,                 // Theta
+      new int[]{0,0});    // Fill Color / Stroke Color
     listPlanets = null;
   }
   
@@ -84,7 +86,7 @@ class SystemPlanets implements CelestialBody{
     barycenter.setDiameter(diameter);
   }
   
-  void setVelocity(PVector velocity){
+  void setVelocity(float velocity){
     barycenter.setVelocity(velocity);
   }
   
@@ -120,7 +122,7 @@ class SystemPlanets implements CelestialBody{
     barycenter.setName(s);
   }
   
-  void setAcceleration(PVector acceleration){
+  void setAcceleration(float acceleration){
     barycenter.setAcceleration(acceleration);
   }
   

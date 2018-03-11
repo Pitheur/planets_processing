@@ -13,10 +13,10 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet moon = new Planet("Lune",5f, new PVector(0,0), new PVector(0,0.2), new PVector(0,0), 0.0123,new int [] {#8B8787,#DEDEDE});
-Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,20), new PVector(0,0), 1,new int [] {#78B4FC,#CBEFFF});
-Planet mars = new Planet("Mars",10f, new PVector(0,0), new PVector(0,16), new PVector(0,0), 0.1,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
-Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 333333,new int [] {#FFF6AF,#FFAA00});
+Planet moon = new Planet("Lune",5f, 0f, 0f, new PVector(0,0), 0.0123,0,new int [] {#8B8787,#DEDEDE});
+Planet earth = new Planet("Terre",10f, 0f, 0f, new PVector(0,0), 1,0,new int [] {#78B4FC,#CBEFFF});
+Planet mars = new Planet("Mars",10f, 0f,0f, new PVector(0,0), 0.1,0,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
+Planet sun = new Planet("Soleil",100f, 0f, 0f, new PVector(0,0), 333333,0,new int [] {#FFF6AF,#FFAA00});
 
 HashMap<CelestialBody,PVector> model = new HashMap<CelestialBody,PVector>();
 HashMap<CelestialBody,PVector> model2 = new HashMap<CelestialBody,PVector>();
@@ -43,10 +43,10 @@ void setup() { //<>//
   }
   starsList.addAllStarsList(stars);
   
-  sun.setPosition(width/2,height/2);
-  mars.setPosition(528,height/2);
-  earth.setPosition(592,height/2);
-  moon.setPosition(earth.position.x-2,height/2);
+  sun.setPosition(width/2,height/2,new PVector(width/2,height/2)); //<>//
+  mars.setPosition(width/2,height/2, sun.getPosition());
+  earth.setPosition(width/4,height/4,sun.getPosition());
+  moon.setPosition(earth.position.x-2,height/2,earth.getPosition());
   
   soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
@@ -73,10 +73,10 @@ void draw() {
   //TerreLune.display();
   //TerreLune.setAllGravity();
   //TerreLune.applyForce(null);
-  soleilTerre.update(); //<>//
+  soleilTerre.update();
   soleilTerre.display();
-  soleilTerre.setAllGravity();
-  soleilTerre.applyForce(null);
+  //soleilTerre.setAllGravity();
+  //soleilTerre.applyForce(null);
   //sun.update();
   //sun.display();
   //sun.setGravity(earth);
