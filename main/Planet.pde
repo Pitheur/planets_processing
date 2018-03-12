@@ -8,6 +8,7 @@ class Planet implements CelestialBody{
   PVector gravity;
   int[] displayColor;
   
+  float distance;
   float theta;
   float mass;
   float diameter;
@@ -24,16 +25,26 @@ class Planet implements CelestialBody{
     this.theta = theta;
   }
 
-   void setPosition(PVector p){
-    this.position = p;
-    this.theta = p.heading();
+   void setPosition(PVector p){ //<>//
+    this.position = p; //<>// //<>//
+  }
+  
+  void setDistance(float d){
+    this.distance = d;
+  }
+  
+  void setDistance(Planet p){
+    this.distance = getPosition().dist(p.getPosition());
   }
   
   void setPosition(float x, float y, PVector origin){
-    this.position = new PVector(x,y); //<>// //<>//
+    PVector p = new PVector(x,y);
+    this.position = p;
+    distance = PVector.dist(origin,p);
+    theta = atan2(y,x);
   } //<>//
   
-  void setDiameter(float dameter){
+  void setDiameter(float diameter){
     this.diameter = diameter;
   }
 
@@ -71,6 +82,10 @@ class Planet implements CelestialBody{
   
   PVector getPosition(){
     return this.position;
+  }
+  
+  float getDistance(){
+    return this.distance;
   }
   
   public float getPositionX(){
@@ -119,8 +134,9 @@ class Planet implements CelestialBody{
   }
   
   void update(){
+    theta = theta - 0.01;
     //velocity.add(acceleration);
-    this.position = PVector.fromAngle(theta); //<>//
+    //this.position = PVector.fromAngle(theta); //<>//
     //acceleration.mult(0);
   }
   
@@ -128,6 +144,6 @@ class Planet implements CelestialBody{
     ellipseMode(CENTER);
     stroke(displayColor[1]);
     fill(displayColor[0]);
-    ellipse(position.x,position.y,getDiameter(),getDiameter());
+    ellipse(getDistance()*cos(theta),getDistance()*sin(theta),getDiameter(),getDiameter());
   }
 }

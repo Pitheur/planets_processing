@@ -43,9 +43,9 @@ void setup() { //<>//
   }
   starsList.addAllStarsList(stars);
   
-  sun.setPosition(width/2,height/2,new PVector(width/2,height/2)); //<>//
-  mars.setPosition(width/2,height/2, sun.getPosition());
-  earth.setPosition(width/4,height/4,sun.getPosition());
+  sun.setPosition(width/2,height/2,new PVector(0,0)); //<>//
+  mars.setPosition(528,height/2, new PVector(width/2,height/2));
+  earth.setPosition(width/4,height/4,new PVector(width/2,height/2));
   moon.setPosition(earth.position.x-2,height/2,earth.getPosition());
   
   soleilTerre.addPlanet(earth);
