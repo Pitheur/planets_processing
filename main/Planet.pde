@@ -25,8 +25,8 @@ class Planet implements CelestialBody{
     this.theta = theta;
   }
 
-   void setPosition(PVector p){ //<>//
-    this.position = p; //<>// //<>//
+   void setPosition(PVector p){
+    this.position = p;
   }
   
   void setDistance(float d){
@@ -39,10 +39,9 @@ class Planet implements CelestialBody{
   
   void setPosition(float x, float y, PVector origin){
     PVector p = new PVector(x,y);
-    this.position = p;
     distance = PVector.dist(origin,p);
     theta = atan2(y,x);
-  } //<>//
+  }
   
   void setDiameter(float diameter){
     this.diameter = diameter;
@@ -57,8 +56,8 @@ class Planet implements CelestialBody{
   }
   
   void setGravity(Planet p){
-    float rX = (p.position.x - this.position.x)/getDistance(p);
-    float rY = (p.position.y - this.position.y)/getDistance(p);
+    float rX = (p.getPositionX() - getPositionX())/getDistance(p);
+    float rY = (p.getPositionY() - getPositionY())/getDistance(p);
     PVector r = new PVector(rX,rY);
     
     this.gravity = r.mult(-GRAVITATION*(getMass()*p.getMass())/sq(getDistance(p)));
@@ -89,11 +88,11 @@ class Planet implements CelestialBody{
   }
   
   public float getPositionX(){
-    return this.position.x;
+    return this.getDistance()*cos(theta);
   }
   
   public float getPositionY(){
-     return this.position.y;
+     return this.getDistance()*sin(theta);
   }
   
   float getDiameter(){
@@ -136,14 +135,18 @@ class Planet implements CelestialBody{
   void update(){
     theta = theta - 0.01;
     //velocity.add(acceleration);
-    //this.position = PVector.fromAngle(theta); //<>//
+    //this.position = PVector.fromAngle(theta);
     //acceleration.mult(0);
   }
   
-  void display(){
+  void display(){ //<>//
+    
     ellipseMode(CENTER);
     stroke(displayColor[1]);
     fill(displayColor[0]);
+    pushMatrix();
+    //translate(250,50);
     ellipse(getDistance()*cos(theta),getDistance()*sin(theta),getDiameter(),getDiameter());
+    popMatrix();
   }
 }

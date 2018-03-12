@@ -46,7 +46,6 @@ void setup() { //<>//
   sun.setPosition(width/2,height/2,new PVector(0,0)); //<>//
   mars.setPosition(528,height/2, new PVector(width/2,height/2));
   earth.setPosition(width/4,height/4,new PVector(width/2,height/2));
-  moon.setPosition(earth.position.x-2,height/2,earth.getPosition());
   
   soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
@@ -68,7 +67,6 @@ void draw() {
   stroke(255);
   starsList.display();
   popStyle();
-  
   //TerreLune.update();
   //TerreLune.display();
   //TerreLune.setAllGravity();

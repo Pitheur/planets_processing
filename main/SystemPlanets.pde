@@ -41,11 +41,11 @@ class SystemPlanets implements CelestialBody{
   }
   
   public float getPositionX(){
-    return this.barycenter.position.x;
+    return this.barycenter.getPositionX();
   }
   
   public float getPositionY(){
-     return this.barycenter.position.y;
+     return this.barycenter. getPositionY();
   }
   
   CelestialBody getBarycenter(){
@@ -138,14 +138,14 @@ class SystemPlanets implements CelestialBody{
   }
   
   void applyForce(PVector f){
-    for(CelestialBody c : listPlanets.keySet()){ //<>//
+    for(CelestialBody c : listPlanets.keySet()){
       c.applyForce(listPlanets.get(c));
     }
   }
   
   void update(){
     for(CelestialBody c : listPlanets.keySet()){
-      c.update();
-    }
+      c.update(); //<>//
+    } //<>//
   }
 }
