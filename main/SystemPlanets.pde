@@ -3,7 +3,7 @@ import java.util.Collection;
 
 class SystemPlanets implements CelestialBody{
   Planet barycenter;
-  HashMap<CelestialBody,PVector> listPlanets;
+  HashMap<CelestialBody,Float> listPlanets;
 
   SystemPlanets(){
     barycenter = new Planet(
@@ -11,7 +11,7 @@ class SystemPlanets implements CelestialBody{
       10f,                // Diameter
       0f,                 // Acceleration
       0f,                 // Velocity
-      new PVector(0,0),   // Gravity
+      0f,   // Gravity
       0f,                 // Mass
       0f,                 // Theta
       new int[]{0,0});    // Fill Color / Stroke Color
@@ -66,11 +66,11 @@ class SystemPlanets implements CelestialBody{
     return listPlanets.size();
   }
   
-  PVector getGravity(){
+  float getGravity(){
     return barycenter.getGravity();
   }
   
-  void setPlanet(CelestialBody c, PVector m){
+  void setPlanet(CelestialBody c, float m){
     listPlanets.put(c,m);
   }
   
@@ -90,7 +90,7 @@ class SystemPlanets implements CelestialBody{
     barycenter.setVelocity(velocity);
   }
   
-  void setGravity(PVector gravity){
+  void setGravity(float gravity){
     barycenter.setGravity(gravity);
   }
   
@@ -104,7 +104,7 @@ class SystemPlanets implements CelestialBody{
       {
         Planet p = (Planet)c;
         barycenter.setGravity(p);
-        PVector g = barycenter.getGravity();
+        float g = barycenter.getGravity();
         listPlanets.put(c,g);
       }
       else
@@ -132,12 +132,15 @@ class SystemPlanets implements CelestialBody{
   
   void display(){
     for(CelestialBody c : listPlanets.keySet()){
+      pushMatrix();
+      translate(barycenter.getPositionX(),barycenter.getPositionY());
       c.display();
+      popMatrix();
     }
     barycenter.display();
   }
   
-  void applyForce(PVector f){
+  void applyForce(float f){
     for(CelestialBody c : listPlanets.keySet()){
       c.applyForce(listPlanets.get(c));
     }
@@ -146,6 +149,6 @@ class SystemPlanets implements CelestialBody{
   void update(){
     for(CelestialBody c : listPlanets.keySet()){
       c.update(); //<>//
-    } //<>//
+    }
   }
 }

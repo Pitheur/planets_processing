@@ -5,7 +5,7 @@ class Planet implements CelestialBody{
   PVector position;
   float velocity;
   float acceleration;
-  PVector gravity;
+  float gravity;
   int[] displayColor;
   
   float distance;
@@ -13,7 +13,7 @@ class Planet implements CelestialBody{
   float mass;
   float diameter;
   
-  Planet (String name, float diameter, float acceleration, float velocity, PVector gravity, float mass, float theta, int[] displayColor)
+  Planet (String name, float diameter, float acceleration, float velocity, float gravity, float mass, float theta, int[] displayColor)
   {
     this.name =name;
     this.diameter = diameter;
@@ -39,6 +39,7 @@ class Planet implements CelestialBody{
   
   void setPosition(float x, float y, PVector origin){
     PVector p = new PVector(x,y);
+    this.position = p;
     distance = PVector.dist(origin,p);
     theta = atan2(y,x);
   }
@@ -51,16 +52,17 @@ class Planet implements CelestialBody{
     this.velocity = velocity;
   }
   
-  void setGravity(PVector gravity){
+  void setGravity(float gravity){
     this.gravity = gravity;
   }
   
   void setGravity(Planet p){
-    float rX = (p.getPositionX() - getPositionX())/getDistance(p);
-    float rY = (p.getPositionY() - getPositionY())/getDistance(p);
-    PVector r = new PVector(rX,rY);
+    //float rX = (p.getPositionX() - getPositionX())/getDistance(p);
+    //float rY = (p.getPositionY() - getPositionY())/getDistance(p);
+    //PVector r = new PVector(rX,rY);
     
-    this.gravity = r.mult(-GRAVITATION*(getMass()*p.getMass())/sq(getDistance(p)));
+    //this.gravity = r.mult(-GRAVITATION*(getMass()*p.getMass())/sq(getDistance(p)));
+    this.gravity = -((getMass()*p.getMass())/sq(distance)); //<>//
   }
 
   void setAcceleration(float acceleration){
@@ -107,7 +109,7 @@ class Planet implements CelestialBody{
     return velocity;
   }
   
-  PVector getGravity(){
+  float getGravity(){
     return gravity;
   }
   
@@ -127,16 +129,16 @@ class Planet implements CelestialBody{
     return this.theta;
   }
   
-  void applyForce(PVector force){
-    PVector f = PVector.div(force, getMass());
-    //this.acceleration.add(f);
+  void applyForce(float force){
+    float f = force/getMass(); //<>//
+    this.acceleration +=  f;
   }
   
   void update(){
-    theta = theta - 0.01;
-    //velocity.add(acceleration);
+    velocity += acceleration; //<>//
+    theta = radians(velocity);
     //this.position = PVector.fromAngle(theta);
-    //acceleration.mult(0);
+    acceleration *= 0;
   }
   
   void display(){ //<>//
