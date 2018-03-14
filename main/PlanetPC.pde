@@ -1,18 +1,20 @@
-class Planet implements CelestialBody{
+class PlanetPC {
   
   String name;
   
   PVector position;
-  PVector velocity;
-  PVector acceleration;
-  PVector gravity;
+
   int[] displayColor;
   
+  float velocity;
+  float acceleration;
+  float gravity;
   float distance;
+  float theta;
   float mass;
   float diameter;
   
-  Planet (String name, float diameter, PVector acceleration, PVector velocity, PVector gravity, float mass, int[] displayColor)
+  PlanetPC (String name, float diameter, float acceleration, float velocity, float gravity, float mass, float theta, int[] displayColor)
   {
     this.name =name;
     this.diameter = diameter;
@@ -21,14 +23,11 @@ class Planet implements CelestialBody{
     this.gravity = gravity;
     this.mass = mass;
     this.displayColor = displayColor;
+    this.theta = theta;
   }
 
    void setPosition(PVector p){
     this.position = p;
-  }
-  
-  void setPosition(float x, float y){
-    this.position = new PVector(x,y);
   }
   
   void setDistance(float d){
@@ -39,27 +38,30 @@ class Planet implements CelestialBody{
     this.distance = getPosition().dist(p.getPosition());
   }
   
+  void setPosition(float x, float y, PVector origin){
+    PVector p = new PVector(x,y);
+    this.position = p;
+    distance = PVector.dist(origin,p);
+    theta = atan2(y,x);
+  }
+  
   void setDiameter(float diameter){
     this.diameter = diameter;
   }
 
-  void setVelocity(PVector velocity){
+  void setVelocity(float velocity){
     this.velocity = velocity;
   }
   
-  void setGravity(PVector gravity){
+  void setGravity(float gravity){
     this.gravity = gravity;
   }
-  
+   
   void setGravity(Planet p){
-      float rX = (p.getPositionX() - getPositionX())/getDistance(p);
-      float rY = (p.getPositionY() - getPositionY())/getDistance(p);
-      PVector r = new PVector(rX,rY);
-      
-      this.gravity = r.mult(-GRAVITATION*(getMass()*p.getMass())/sq(getDistance(p))); //<>//
+    this.gravity = -((getMass()*p.getMass())/sq(distance));
   }
 
-  void setAcceleration(PVector acceleration){
+  void setAcceleration(float acceleration){
     this.acceleration = acceleration;
   }
   
@@ -71,6 +73,10 @@ class Planet implements CelestialBody{
     this.name = s;
   }
   
+  void setTheta(float f){
+    this.theta = f;
+  }
+  
   PVector getPosition(){
     return this.position;
   }
@@ -80,11 +86,11 @@ class Planet implements CelestialBody{
   }
   
   public float getPositionX(){
-    return this.position.x;
+    return this.getDistance()*cos(theta);
   }
   
   public float getPositionY(){
-     return this.position.y;
+     return this.getDistance()*sin(theta);
   }
   
   float getDiameter(){
@@ -95,15 +101,15 @@ class Planet implements CelestialBody{
     return  getPosition().dist(p.getPosition());
   }
 
-  PVector getVelocity(){
+  float getVelocity(){
     return velocity;
   }
   
-  PVector getGravity(){
+  float getGravity(){
     return gravity;
   }
   
-  PVector getAcceleration(){
+  float getAcceleration(){
     return acceleration;
   }
   
@@ -113,17 +119,22 @@ class Planet implements CelestialBody{
   
   String getName(){
     return this.name;
-  } //<>//
-  
-  void applyForce(PVector force){
-    PVector f = force.div(getMass());
-    this.acceleration.add(f);
   }
   
-  void update(){ //<>//
-    velocity.add(acceleration);
-    position.add(velocity);
-    acceleration.mult(0);
+  float getTheta(){
+    return this.theta;
+  }
+  
+  void applyForce(float force){
+    float f = force/getMass();
+    this.acceleration +=  f;
+  }
+  
+  void update(){
+    velocity += acceleration;
+    distance += acceleration;
+    theta = radians(velocity);
+    acceleration *= 0;
   }
   
   void display(){
@@ -133,7 +144,7 @@ class Planet implements CelestialBody{
     fill(displayColor[0]);
     
     pushMatrix();
-    ellipse(getPosition().x,getPosition().y,getDiameter(),getDiameter());
+    ellipse(getDistance()*cos(theta),getDistance()*sin(theta),getDiameter(),getDiameter());
     popMatrix();
   }
 }

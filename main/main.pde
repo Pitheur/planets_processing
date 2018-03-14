@@ -3,7 +3,7 @@ import controlP5.*;
 import java.util.*;
 import processing.core.PApplet;
 
-final float GRAVITATION = 0.6;
+final float GRAVITATION = 0.16;
 
 StarsList starsSparkleList = new StarsList();
 StarsList starsMovingList = new StarsList();
@@ -13,10 +13,18 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet moon = new Planet("Lune",5f, 0f, 0f, 0f, 0.0123,0,new int [] {#8B8787,#DEDEDE});
-Planet earth = new Planet("Terre",10f, 0f, 0f, 0f, 1,0,new int [] {#78B4FC,#CBEFFF});
-Planet mars = new Planet("Mars",10f, 0f,0f, 0f, 0.1,0,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
-Planet sun = new Planet("Soleil",100f, 0f, 0f, 0f, 333333,0,new int [] {#FFF6AF,#FFAA00});
+Planet moon = new Planet(
+      "Lune",                         // Name
+      5f,                             // Diameter
+      new PVector(0,0),               // Acceleration
+      new PVector(0,0),               // Velocity
+      new PVector(0,0),               // Gravity
+      0.000123,                         // Mass
+      new int[]{#8B8787,#DEDEDE});    // Fill Color / Stroke Color
+      
+Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,2), new PVector(0,0), 0.01,new int [] {#78B4FC,#CBEFFF});
+Planet mars = new Planet("Mars",10f, new PVector(0,0),new PVector(0,1.5), new PVector(0,0), 0.001,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
+Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 3333.33f,new int [] {#FFF6AF,#FFAA00});
 
 HashMap<CelestialBody,PVector> model = new HashMap<CelestialBody,PVector>();
 HashMap<CelestialBody,PVector> model2 = new HashMap<CelestialBody,PVector>();
@@ -43,10 +51,10 @@ void setup() { //<>//
   }
   starsList.addAllStarsList(stars);
   
-  sun.setPosition(width/2,height/2,new PVector(0,0));
-  mars.setPosition(528,height/2, new PVector(width/2,height/2));
-  earth.setPosition(width/4,height/4,new PVector(width/2,height/2));
-  moon.setPosition(width/4 +10,height/4,new PVector(width/4,height/4));
+  sun.setPosition(width/2,height/2);
+  mars.setPosition(528,height/2);
+  earth.setPosition(592,height/2);
+  moon.setPosition(earth.position.x-2,height/4);
   
   soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
@@ -75,7 +83,7 @@ void draw() {
   soleilTerre.update();
   soleilTerre.display();
   soleilTerre.setAllGravity();
-  soleilTerre.applyForce(0f);
+  soleilTerre.applyForce(null);
   //sun.update();
   //sun.display();
   //sun.setGravity(earth);
