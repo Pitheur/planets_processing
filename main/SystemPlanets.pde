@@ -12,18 +12,21 @@ class SystemPlanets implements CelestialBody{
       new PVector(0,0),   // Acceleration
       new PVector(0,0),   // Velocity
       new PVector(0,0),   // Gravity
-      0,new int[]{0,0});  // Fill Color / Stroke Color
+      0f,                 // Mass
+      new int[]{0,0});    // Fill Color / Stroke Color
     listPlanets = null;
   }
   
   SystemPlanets(Planet p,HashMap l){
     this.barycenter = p;
     this.listPlanets = l;
+    setRelativePosition();
   }
   
   void addPlanet(CelestialBody c){
     if (listPlanets != null){
       listPlanets.put(c, c.getGravity());
+      setRelativePosition();
     }
   }
   
@@ -39,11 +42,15 @@ class SystemPlanets implements CelestialBody{
   }
   
   public float getPositionX(){
-    return this.barycenter.position.x;
+    return this.barycenter.getPositionX();
   }
   
   public float getPositionY(){
-     return this.barycenter.position.y;
+     return this.barycenter. getPositionY();
+  }
+  
+  public PVector getRelativePosition(){
+    return barycenter.getRelativePosition();
   }
   
   CelestialBody getBarycenter(){
@@ -97,7 +104,8 @@ class SystemPlanets implements CelestialBody{
   }
   
   void setAllGravity(){
-    for(CelestialBody c : listPlanets.keySet()){
+    for(CelestialBody c : listPlanets.keySet())
+    {
       if(c instanceof Planet)
       {
         Planet p = (Planet)c;
@@ -116,6 +124,17 @@ class SystemPlanets implements CelestialBody{
     }
   }
   
+  void setRelativePosition(){
+    for(CelestialBody c : listPlanets.keySet()){
+      PVector p = new PVector(barycenter.getPositionX()-c.getPositionX(),barycenter.getPositionY()-c.getPositionY());
+      c.setRelativePosition(p);
+    }
+  }
+  
+  void setRelativePosition(PVector p){
+    this.barycenter.setRelativePosition(p);
+  }
+  
   void setName(String s){
     barycenter.setName(s);
   }
@@ -130,20 +149,23 @@ class SystemPlanets implements CelestialBody{
   
   void display(){
     for(CelestialBody c : listPlanets.keySet()){
+      pushMatrix();
+      //translate(barycenter.getPositionX(),barycenter.getPositionY());
       c.display();
+      popMatrix();
     }
     barycenter.display();
   }
   
   void applyForce(PVector f){
-    for(CelestialBody c : listPlanets.keySet()){ //<>//
+    for(CelestialBody c : listPlanets.keySet()){
       c.applyForce(listPlanets.get(c));
     }
   }
   
   void update(){
     for(CelestialBody c : listPlanets.keySet()){
-      c.update();
+      c.update(); //<>//
     }
   }
 }

@@ -13,10 +13,18 @@ ArrayList starsSparkle = new ArrayList();
 ArrayList starsMoving = new ArrayList();
 ArrayList stars = new ArrayList();
 
-Planet moon = new Planet("Lune",5f, new PVector(0,0), new PVector(0,0.2), new PVector(0,0), 0.0123,new int [] {#8B8787,#DEDEDE});
-Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,20), new PVector(0,0), 1,new int [] {#78B4FC,#CBEFFF});
-Planet mars = new Planet("Mars",10f, new PVector(0,0), new PVector(0,16), new PVector(0,0), 0.1,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
-Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 333333,new int [] {#FFF6AF,#FFAA00});
+Planet moon = new Planet(
+      "Lune",                         // Name
+      5f,                             // Diameter
+      new PVector(0,0),               // Acceleration
+      new PVector(0,0),               // Velocity
+      new PVector(0,0),               // Gravity
+      0.000123,                         // Mass
+      new int[]{#8B8787,#DEDEDE});    // Fill Color / Stroke Color
+      
+Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,2), new PVector(0,0), 0.01,new int [] {#78B4FC,#CBEFFF});
+Planet mars = new Planet("Mars",10f, new PVector(0,0),new PVector(0,1.6), new PVector(0,0), 0.001,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
+Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 3333.33f,new int [] {#FFF6AF,#FFAA00});
 
 HashMap<CelestialBody,PVector> model = new HashMap<CelestialBody,PVector>();
 HashMap<CelestialBody,PVector> model2 = new HashMap<CelestialBody,PVector>();
@@ -27,7 +35,7 @@ SystemPlanets TerreLune = new SystemPlanets(earth,model2);
 void setup() { //<>//
   size(1440, 900);
   background(0);
-  frameRate(30);
+  frameRate(60);
   for(int i=0; i < 150; i++){
     starsSparkle.add(new Star(random(width),random(height)));
   }
@@ -44,9 +52,11 @@ void setup() { //<>//
   starsList.addAllStarsList(stars);
   
   sun.setPosition(width/2,height/2);
+  //earth.setPosition(128,0);
+  //mars.setPosition(0,0);
   mars.setPosition(528,height/2);
   earth.setPosition(592,height/2);
-  moon.setPosition(earth.position.x-2,height/2);
+  moon.setPosition(earth.position.x-2,height/4);
   
   soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
@@ -68,12 +78,11 @@ void draw() {
   stroke(255);
   starsList.display();
   popStyle();
-  
   //TerreLune.update();
   //TerreLune.display();
   //TerreLune.setAllGravity();
   //TerreLune.applyForce(null);
-  soleilTerre.update(); //<>//
+  soleilTerre.update();
   soleilTerre.display();
   soleilTerre.setAllGravity();
   soleilTerre.applyForce(null);
@@ -88,7 +97,7 @@ void draw() {
   //earth.setGravity(moon);
 
   //moon.applyForce(earth.getGravity());
-  ////moon.applyForce(sun.getGravity());
+  //moon.applyForce(sun.getGravity());
   //moon.update();
   //moon.display();
 }
