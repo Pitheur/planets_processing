@@ -23,7 +23,7 @@ Planet moon = new Planet(
       new int[]{#8B8787,#DEDEDE});    // Fill Color / Stroke Color
       
 Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,2), new PVector(0,0), 0.01,new int [] {#78B4FC,#CBEFFF});
-Planet mars = new Planet("Mars",10f, new PVector(0,0),new PVector(0,1.5), new PVector(0,0), 0.001,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
+Planet mars = new Planet("Mars",10f, new PVector(0,0),new PVector(0,1.6), new PVector(0,0), 0.001,new int [] {#C64834,#FA8A79});// 0.70858809351921081542968730
 Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new PVector(0,0), 3333.33f,new int [] {#FFF6AF,#FFAA00});
 
 HashMap<CelestialBody,PVector> model = new HashMap<CelestialBody,PVector>();
@@ -52,6 +52,8 @@ void setup() { //<>//
   starsList.addAllStarsList(stars);
   
   sun.setPosition(width/2,height/2);
+  //earth.setPosition(128,0);
+  //mars.setPosition(0,0);
   mars.setPosition(528,height/2);
   earth.setPosition(592,height/2);
   moon.setPosition(earth.position.x-2,height/4);
@@ -95,7 +97,7 @@ void draw() {
   //earth.setGravity(moon);
 
   //moon.applyForce(earth.getGravity());
-  ////moon.applyForce(sun.getGravity());
+  //moon.applyForce(sun.getGravity());
   //moon.update();
   //moon.display();
 }

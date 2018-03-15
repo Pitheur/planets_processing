@@ -20,11 +20,13 @@ class SystemPlanets implements CelestialBody{
   SystemPlanets(Planet p,HashMap l){
     this.barycenter = p;
     this.listPlanets = l;
+    setRelativePosition();
   }
   
   void addPlanet(CelestialBody c){
     if (listPlanets != null){
       listPlanets.put(c, c.getGravity());
+      setRelativePosition();
     }
   }
   
@@ -45,6 +47,10 @@ class SystemPlanets implements CelestialBody{
   
   public float getPositionY(){
      return this.barycenter. getPositionY();
+  }
+  
+  public PVector getRelativePosition(){
+    return barycenter.getRelativePosition();
   }
   
   CelestialBody getBarycenter(){
@@ -98,7 +104,8 @@ class SystemPlanets implements CelestialBody{
   }
   
   void setAllGravity(){
-    for(CelestialBody c : listPlanets.keySet()){
+    for(CelestialBody c : listPlanets.keySet())
+    {
       if(c instanceof Planet)
       {
         Planet p = (Planet)c;
@@ -115,6 +122,17 @@ class SystemPlanets implements CelestialBody{
         }
       }
     }
+  }
+  
+  void setRelativePosition(){
+    for(CelestialBody c : listPlanets.keySet()){
+      PVector p = new PVector(barycenter.getPositionX()-c.getPositionX(),barycenter.getPositionY()-c.getPositionY());
+      c.setRelativePosition(p);
+    }
+  }
+  
+  void setRelativePosition(PVector p){
+    this.barycenter.setRelativePosition(p);
   }
   
   void setName(String s){

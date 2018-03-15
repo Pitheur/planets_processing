@@ -3,6 +3,7 @@ class Planet implements CelestialBody{
   String name;
   
   PVector position;
+  PVector relativePosition;
   PVector velocity;
   PVector acceleration;
   PVector gravity;
@@ -21,6 +22,7 @@ class Planet implements CelestialBody{
     this.gravity = gravity;
     this.mass = mass;
     this.displayColor = displayColor;
+    this.relativePosition = new PVector(0,0);
   }
 
    void setPosition(PVector p){
@@ -29,6 +31,14 @@ class Planet implements CelestialBody{
   
   void setPosition(float x, float y){
     this.position = new PVector(x,y);
+  }
+  
+  void setRelativePosition(PVector p){
+    this.relativePosition = p;
+  }
+  
+  void setRelativePosition(float x, float y){
+    this.relativePosition = new PVector(x,y);
   }
   
   void setDistance(float d){
@@ -75,6 +85,10 @@ class Planet implements CelestialBody{
     return this.position;
   }
   
+  PVector getRelativePosition(){
+    return this.relativePosition;
+  }
+  
   float getDistance(){
     return this.distance;
   }
@@ -85,6 +99,14 @@ class Planet implements CelestialBody{
   
   public float getPositionY(){
      return this.position.y;
+  }
+  
+  public float getRelativePositionX(){
+    return this.relativePosition.x;
+  }
+  
+  public float getRelativePositionY(){
+     return this.relativePosition.y;
   }
   
   float getDiameter(){
