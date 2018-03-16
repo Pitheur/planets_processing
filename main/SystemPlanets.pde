@@ -126,7 +126,7 @@ class SystemPlanets implements CelestialBody{
   
   void setRelativePosition(){
     for(CelestialBody c : listPlanets.keySet()){
-      PVector p = new PVector(barycenter.getPositionX()-c.getPositionX(),barycenter.getPositionY()-c.getPositionY());
+      PVector p = new PVector(c.getPositionX()-barycenter.getPositionX(),c.getPositionY()-barycenter.getPositionY());
       c.setRelativePosition(p);
     }
   }
@@ -150,7 +150,7 @@ class SystemPlanets implements CelestialBody{
   void display(){
     for(CelestialBody c : listPlanets.keySet()){
       pushMatrix();
-      //translate(barycenter.getPositionX(),barycenter.getPositionY());
+      translate(barycenter.getRelativePositionX(),barycenter.getRelativePositionY()); //<>//
       c.display();
       popMatrix();
     }
@@ -159,7 +159,7 @@ class SystemPlanets implements CelestialBody{
   
   void applyForce(PVector f){
     for(CelestialBody c : listPlanets.keySet()){
-      c.applyForce(listPlanets.get(c));
+      c.applyForce(listPlanets.get(c)); //<>//
     }
   }
   

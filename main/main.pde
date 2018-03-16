@@ -29,6 +29,7 @@ Planet sun = new Planet("Soleil",100f, new PVector(0,0), new PVector(0,0), new P
 HashMap<CelestialBody,PVector> model = new HashMap<CelestialBody,PVector>();
 HashMap<CelestialBody,PVector> model2 = new HashMap<CelestialBody,PVector>();
 
+
 SystemPlanets soleilTerre = new SystemPlanets(sun,model);
 SystemPlanets TerreLune = new SystemPlanets(earth,model2);
 
@@ -56,12 +57,13 @@ void setup() { //<>//
   //mars.setPosition(0,0);
   mars.setPosition(528,height/2);
   earth.setPosition(592,height/2);
-  moon.setPosition(earth.position.x-2,height/4);
+  moon.setPosition(590,height/4);
   
   soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
   TerreLune.addPlanet(moon);
   soleilTerre.addPlanet(TerreLune);
+  soleilTerre.setRelativePosition();
   
   Gui gui = new Gui(this);
   gui.createGroup();
