@@ -57,7 +57,7 @@ void setup() { //<>//
   //mars.setPosition(0,0);
   mars.setPosition(528,height/2);
   earth.setPosition(592,height/2);
-  moon.setPosition(590,height/4);
+  moon.setPosition(600,height/2);
   
   soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
