@@ -53,13 +53,11 @@ void setup() { //<>//
   starsList.addAllStarsList(stars);
   
   sun.setPosition(width/2,height/2);
-  //earth.setPosition(128,0);
-  //mars.setPosition(0,0);
   mars.setPosition(528,height/2);
   earth.setPosition(592,height/2);
   moon.setPosition(600,height/2);
   
-  soleilTerre.addPlanet(earth);
+  //soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
   TerreLune.addPlanet(moon);
   soleilTerre.addPlanet(TerreLune);
@@ -80,26 +78,9 @@ void draw() {
   stroke(255);
   starsList.display();
   popStyle();
-  //TerreLune.update();
-  //TerreLune.display();
-  //TerreLune.setAllGravity();
-  //TerreLune.applyForce(null);
+
   soleilTerre.update();
   soleilTerre.display();
   soleilTerre.setAllGravity();
   soleilTerre.applyForce(null);
-  //sun.update();
-  //sun.display();
-  //sun.setGravity(earth);
-
-  //earth.applyForce(sun.getGravity());
-  //earth.applyForce(moon.getGravity());
-  //earth.update();
-  //earth.display();
-  //earth.setGravity(moon);
-
-  //moon.applyForce(earth.getGravity());
-  //moon.applyForce(sun.getGravity());
-  //moon.update();
-  //moon.display();
 }
