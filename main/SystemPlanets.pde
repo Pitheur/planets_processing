@@ -158,12 +158,14 @@ class SystemPlanets implements CelestialBody{
   }
   
   void applyForce(PVector f){
-    for(CelestialBody c : listPlanets.keySet()){
+    for(CelestialBody c : listPlanets.keySet()){ //<>//
       if(c instanceof SystemPlanets)
       {
-        c.applyForce(listPlanets.get(c)); //<>//
+        SystemPlanets sp = (SystemPlanets)c;
+        sp.getBarycenter().applyForce(listPlanets.get(c));
+        //c.applyForce(listPlanets.get(c));
       }
-      if(c instanceof CelestialBody)
+      else if(c instanceof CelestialBody)
       {
         c.applyForce(listPlanets.get(c));
       }

@@ -66,7 +66,7 @@ class Planet implements CelestialBody{
       float rY = (p.getPositionY() - getPositionY())/getDistance(p);
       PVector r = new PVector(rX,rY);
       
-      this.gravity = r.mult(-GRAVITATION*(getMass()*p.getMass())/sq(getDistance(p))); //<>//
+      this.gravity = r.mult(-GRAVITATION*(getMass()*p.getMass())/sq(getDistance(p)));
   }
 
   void setAcceleration(PVector acceleration){
