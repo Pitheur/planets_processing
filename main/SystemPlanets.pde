@@ -118,6 +118,10 @@ class SystemPlanets implements CelestialBody{
         if(c instanceof SystemPlanets)
         {
           SystemPlanets sp = (SystemPlanets)c;
+          Planet pl = this.barycenter;
+          pl.setGravity((Planet)sp.getBarycenter());
+          PVector bG = this.barycenter.getGravity();
+          this.listPlanets.put(c,bG);
           sp.setAllGravity();
         }
       }
@@ -162,8 +166,10 @@ class SystemPlanets implements CelestialBody{
       if(c instanceof SystemPlanets)
       {
         SystemPlanets sp = (SystemPlanets)c;
-        sp.getBarycenter().applyForce(listPlanets.get(c));
-        //c.applyForce(listPlanets.get(c));
+        Planet pl = (Planet)sp.getBarycenter();
+        PVector force = listPlanets.get(c);
+        pl.applyForce(force);
+        c.applyForce(listPlanets.get(c));
       }
       else if(c instanceof CelestialBody)
       {
@@ -174,6 +180,12 @@ class SystemPlanets implements CelestialBody{
   
   void update(){
     for(CelestialBody c : listPlanets.keySet()){
+      if(c instanceof SystemPlanets)
+      {
+        SystemPlanets sp = (SystemPlanets)c;
+        Planet b = (Planet)sp.getBarycenter();
+        b.update();
+      }
       c.update();
       //TODO mettre à jour la position relative au barycentre
       //setRelativePosition();

@@ -33,7 +33,7 @@ HashMap<CelestialBody,PVector> model2 = new HashMap<CelestialBody,PVector>();
 SystemPlanets soleilTerre = new SystemPlanets(sun,model);
 SystemPlanets TerreLune = new SystemPlanets(earth,model2);
 
-void setup() { //<>//
+void setup() {
   size(1440, 900);
   background(0);
   frameRate(60);
