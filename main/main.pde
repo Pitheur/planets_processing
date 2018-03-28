@@ -19,7 +19,7 @@ Planet moon = new Planet(
       new PVector(0,0),               // Acceleration
       new PVector(0,0),               // Velocity
       new PVector(0,0),               // Gravity
-      0.000123,                         // Mass
+      0.000123,                       // Mass
       new int[]{#8B8787,#DEDEDE});    // Fill Color / Stroke Color
       
 Planet earth = new Planet("Terre",10f, new PVector(0,0), new PVector(0,2), new PVector(0,0), 0.01,new int [] {#78B4FC,#CBEFFF});
