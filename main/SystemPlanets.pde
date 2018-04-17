@@ -71,6 +71,10 @@ class SystemPlanets implements CelestialBody{
     return listPlanets.size();
   }
   
+  HashMap getListPlanet(){
+    return this.listPlanets;
+  }
+  
   PVector getGravity(){
     return barycenter.getGravity();
   }
@@ -185,6 +189,12 @@ class SystemPlanets implements CelestialBody{
         SystemPlanets sp = (SystemPlanets)c;
         Planet b = (Planet)sp.getBarycenter();
         b.update();
+        // Position relative des satellites
+        HashMap<CelestialBody,PVector> hm = sp.getListPlanet();
+        for(CelestialBody cb : hm.keySet()){
+          PVector p = new PVector(b.getPositionX()-cb.getRelativePosition().x,b.getPositionY()-cb.getRelativePosition().y);
+          cb.setPosition(p);
+        }
       }
       c.update();
       //TODO mettre à jour la position relative au barycentre
