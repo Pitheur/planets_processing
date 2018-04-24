@@ -65,6 +65,7 @@ void setup() {
   
   Gui gui = new Gui(this);
   gui.createGroup();
+  gui.upDateListBox(soleilTerre,0);
 }
 
 void draw() {
