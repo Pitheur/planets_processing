@@ -37,6 +37,7 @@ void setup() {
   size(1440, 900);
   background(0);
   frameRate(60);
+  
   for(int i=0; i < 150; i++){
     starsSparkle.add(new Star(random(width),random(height)));
   }
@@ -57,7 +58,6 @@ void setup() {
   earth.setPosition(592,height/2);
   moon.setPosition(600,height/2);
   
-  //soleilTerre.addPlanet(earth);
   soleilTerre.addPlanet(mars);
   TerreLune.addPlanet(moon);
   soleilTerre.addPlanet(TerreLune);

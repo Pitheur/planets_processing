@@ -21,12 +21,26 @@ class Gui{
      .moveTo(g3);
      
    listPlanets = cp5.addListBox("Liste des Planètes")
-      .setPosition(10,40)
+      .setPosition(10,80)
       .setSize(120,120)
       .setItemHeight(15)
       .setColorBackground(color(255, 128))
       .setColorActive(color(0))
       .setColorForeground(color(255, 100,0));
+      
+    cp5.addTextfield("Name")
+     .setPosition(10,40)
+     .setSize(120,10)
+     .setFont(createFont("arial",10))
+     .setFocus(true)
+     .setColor(color(255,100,0));
+     
+    cp5.addBang("clear All")
+     .setPosition(10,170)
+     .setSize(80,20)
+     .setColorForeground(color(#d62c20))
+     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+    
   }
   
   void upDateListBox(CelestialBody cb,int i){
