@@ -85,3 +85,7 @@ void draw() {
   soleilTerre.setAllGravity();
   soleilTerre.applyForce(null);
 }
+
+void clearAll(){
+  println("clearAll");
+}

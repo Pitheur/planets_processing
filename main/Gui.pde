@@ -10,15 +10,12 @@ class Gui{
   }
   
   void createGroup(){
-    
-    Group g3 = cp5.addGroup("myGroup1");
                 
     cp5.addSlider("hello")
      .setPosition(10,20)
      .setSize(100,10)
      .setRange(100,500)
-     .setValue(100)
-     .moveTo(g3);
+     .setValue(100);
      
    listPlanets = cp5.addListBox("Liste des Planètes")
       .setPosition(10,80)
@@ -35,15 +32,18 @@ class Gui{
      .setFocus(true)
      .setColor(color(255,100,0));
      
-    cp5.addBang("clear All")
-     .setPosition(10,170)
+    cp5.addBang("clearAll")
+     .setLabel("Clear All")
+     .setPosition(10,200)
      .setSize(80,20)
+     .setTriggerEvent(Bang.RELEASE)
      .setColorForeground(color(#d62c20))
      .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
     
   }
   
-  void upDateListBox(CelestialBody cb,int i){
+  void upDateListBox(CelestialBody cb,int i)
+  {
     if(cb instanceof Planet)
     {
       Planet p = (Planet)cb;
