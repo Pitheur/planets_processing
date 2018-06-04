@@ -9,16 +9,10 @@ class Gui{
     this.cp5 = new ControlP5(p);
   }
   
-  void createGroup(){
-                
-    cp5.addSlider("hello")
-     .setPosition(10,20)
-     .setSize(100,10)
-     .setRange(100,500)
-     .setValue(100);
+  void createGroup(){             
      
    listPlanets = cp5.addListBox("Liste des Planètes")
-      .setPosition(10,80)
+      .setPosition(10,20)
       .setSize(120,120)
       .setItemHeight(15)
       .setColorBackground(color(255, 128))
@@ -26,15 +20,33 @@ class Gui{
       .setColorForeground(color(255, 100,0));
       
     cp5.addTextfield("Name")
-     .setPosition(10,40)
+     .setPosition(10,180)
      .setSize(120,10)
      .setFont(createFont("arial",10))
      .setFocus(true)
      .setColor(color(255,100,0));
      
+    cp5.addSlider("Size")
+     .setPosition(10,220)
+     .setSize(100,10)
+     .setRange(100,500)
+     .setValue(100);
+     
+    cp5.addKnob("Mass")
+      .setRange(0,255)
+      .setValue(50)
+      .setPosition(10,240)
+      .setRadius(50)
+      .setDragDirection(Knob.VERTICAL);
+     
+   cp5.addSlider2D("Start position")
+     .setPosition(10,360)
+     .setSize(100,100)
+     .setArrayValue(new float[] {50, 50});
+     
     cp5.addBang("clearAll")
      .setLabel("Clear All")
-     .setPosition(10,200)
+     .setPosition(10,500)
      .setSize(80,20)
      .setTriggerEvent(Bang.RELEASE)
      .setColorForeground(color(#d62c20))
