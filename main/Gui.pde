@@ -11,7 +11,7 @@ class Gui{
   
   void createGroup(){             
      
-   listPlanets = cp5.addListBox("Liste des Planètes")
+   listPlanets = cp5.addListBox("Liste des Planetes")
       .setPosition(10,20)
       .setSize(120,120)
       .setItemHeight(15)
