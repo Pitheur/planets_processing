@@ -11,7 +11,7 @@ class Gui{
   
   void createGroup(){             
      
-   listPlanets = cp5.addListBox("Liste des Planetes")
+   listPlanets = cp5.addListBox("List of planets")
       .setPosition(10,20)
       .setSize(120,120)
       .setItemHeight(15)
@@ -37,16 +37,28 @@ class Gui{
       .setValue(50)
       .setPosition(10,240)
       .setRadius(50)
-      .setDragDirection(Knob.VERTICAL);
+      .setDragDirection(Knob.HORIZONTAL);
+      
+   cp5.addSlider("Velocity X")
+     .setPosition(10,360)
+     .setSize(100,10)
+     .setRange(100,500)
+     .setValue(100);
+     
+   cp5.addSlider("Velocity Y")
+     .setPosition(10,380)
+     .setSize(100,10)
+     .setRange(100,500)
+     .setValue(100);
      
    cp5.addSlider2D("Start position")
-     .setPosition(10,360)
+     .setPosition(10,420)
      .setSize(100,100)
      .setArrayValue(new float[] {50, 50});
      
     cp5.addBang("clearAll")
      .setLabel("Clear All")
-     .setPosition(10,500)
+     .setPosition(10,550)
      .setSize(80,20)
      .setTriggerEvent(Bang.RELEASE)
      .setColorForeground(color(#d62c20))
