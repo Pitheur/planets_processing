@@ -89,3 +89,19 @@ void draw() {
 void clearAll(){
   println("clearAll");
 }
+
+void controlEvent(ControlEvent theEvent) {
+  // DropdownList is of type ControlGroup.
+  // A controlEvent will be triggered from inside the ControlGroup class.
+  // therefore you need to check the originator of the Event with
+  // if (theEvent.isGroup())
+  // to avoid an error message thrown by controlP5.
+
+  if (theEvent.isGroup()) {
+    // check if the Event was triggered from a ControlGroup
+    println("event from group : "+theEvent.getGroup().getValue()+" from "+theEvent.getGroup());
+  } 
+  else if (theEvent.isController()) {
+    println("event from controller : "+theEvent.getController().getValue()+" from "+theEvent.getController());
+  }
+}
